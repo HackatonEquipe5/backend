@@ -1,0 +1,24 @@
+{
+  "name": "my-app",
+  "scripts": {
+    "dev": "tsx watch src/index.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.1",
+    "@hono/swagger-ui": "^0.4.1",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "hono": "^4.7.4",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.12.1",
+    "my-app": "file:"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.0.3",
+    "@types/bcrypt": "^5.0.2",
+    "@types/node": "^20.11.17",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.6.3"
+  }
+}
