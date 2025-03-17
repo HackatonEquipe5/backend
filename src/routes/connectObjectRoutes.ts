@@ -1,10 +1,10 @@
 import { Hono } from 'hono'
 import {
-  getConnectObject,
-  getConnectObjectById,
-  createConnectObjectHandler,
-  updateConnectObjectHandler,
-  deleteConnectObjectHandler,
+    getConnectObject,
+    getConnectObjectById,
+    createConnectObjectHandler,
+    updateConnectObjectHandler,
+    deleteConnectObjectHandler, getSpeechToText,
 } from '../controller/connectObjectController'
 
 import { cors } from 'hono/cors'
@@ -22,6 +22,7 @@ userRoutes.use(
 
 userRoutes.get('/connectobject', getConnectObject)
 userRoutes.get('/connectobject/:id', getConnectObjectById)
+userRoutes.get('/speechtotext', getSpeechToText)
 userRoutes.post('/createconnectobject', createConnectObjectHandler)
 userRoutes.put('/connectobject/:id',  updateConnectObjectHandler)
 userRoutes.delete('/connectobject/:id', deleteConnectObjectHandler)

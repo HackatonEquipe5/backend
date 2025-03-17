@@ -1,6 +1,8 @@
 import { Context } from 'hono'
 import { ConnectObjectModel } from '../models/connectObject'
 import bcrypt from 'bcrypt'
+import { AssemblyAI } from 'assemblyai';
+import { promises as fs } from 'fs';
 
 export const getConnectObject = async (c: Context) => {
   try {
@@ -24,6 +26,41 @@ export const getConnectObjectById = async (c: Context) => {
       return c.json({ message: 'Error fetching ConnectObject', error }, 500)
     }
 }
+
+export const getSpeechToText = async (c: Context) => {
+  try {
+    const client = new AssemblyAI({
+      apiKey: '9001823fcda34038a7cbc150cdd37ad7',
+      baseUrl: 'https://api.eu.assemblyai.com'
+    });
+
+    const FILE_URL =
+        '/home/dorianjoly/Bureau/COURS_YNOV/Hackaton/backend/doc/Comment commencer un discours _ Ne plus dire bonjour mais captiver l\'audience dès votre arrivée..mp3';
+
+// You can also transcribe a local file by passing in a file path
+// const FILE_URL = './path/to/file.mp3';
+
+// Request parameters
+    const data = {
+      audio: FILE_URL,
+      language_code: 'fr'
+    }
+
+    const run = async () => {
+      const transcript = await client.transcripts.transcribe(data);
+      console.log(transcript.text);
+      return transcript;
+    };
+
+    const transcript = await run();
+
+    return c.json({ message: transcript.text }, 200);
+
+  } catch (error) {
+    console.error(error);
+    return c.json({ message: 'Error processing audio file', error }, 500);
+  }
+};
 
 export const createConnectObjectHandler = async (c: Context) => {
     try {
