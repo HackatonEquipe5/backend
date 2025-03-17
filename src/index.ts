@@ -3,7 +3,7 @@ import { Hono } from "hono";
 import { connectDB } from "./db";
 import { cors } from 'hono/cors'
 import connectObjectRoute from "./routes/connectObjectRoutes";
-
+import userRoutes from "./routes/userRoutes";
 const app = new Hono();
 
 connectDB();
@@ -17,5 +17,6 @@ app.use(
 )
 
 app.route('/api', connectObjectRoute)
+app.route("/api", userRoutes);
 
 serve(app);
