@@ -4,6 +4,7 @@ import { connectDB } from "./db";
 import { cors } from 'hono/cors'
 import connectObjectRoute from "./routes/connectObjectRoutes";
 import userRoutes from "./routes/userRoutes";
+import iotCommuniqueRoutes from "./routes/iotCommuniqueRoute";
 const app = new Hono();
 
 connectDB();
@@ -18,5 +19,6 @@ app.use(
 
 app.route('/api', connectObjectRoute)
 app.route("/api", userRoutes);
+app.route("/api", iotCommuniqueRoutes);
 
 serve(app);

@@ -4,7 +4,7 @@ import {
     getConnectObjectById,
     createConnectObjectHandler,
     updateConnectObjectHandler,
-    deleteConnectObjectHandler, getSpeechToText,
+    deleteConnectObjectHandler,
 } from '../controller/connectObjectController'
 
 import { cors } from 'hono/cors'
@@ -21,7 +21,7 @@ userRoutes.use(
     })
 )
 
-userRoutes.get('/speechtotext',jwtAuthMiddleware, getSpeechToText)
+
 userRoutes.get('/connectobject',jwtAuthMiddleware, getConnectObject)
 userRoutes.get('/connectobject/:id',jwtAuthMiddleware, getConnectObjectById)
 userRoutes.post('/createconnectobject',jwtAuthMiddleware,createConnectObjectHandler)
