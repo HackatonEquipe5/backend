@@ -8,6 +8,7 @@ import {
 } from '../controller/connectObjectController'
 
 import { cors } from 'hono/cors'
+import { jwtAuthMiddleware } from '../middleware/middlewareAuth'
 
 const userRoutes = new Hono()
 
@@ -20,10 +21,10 @@ userRoutes.use(
     })
 )
 
-userRoutes.get('/connectobject', getConnectObject)
-userRoutes.get('/connectobject/:id', getConnectObjectById)
-userRoutes.post('/createconnectobject', createConnectObjectHandler)
-userRoutes.put('/connectobject/:id',  updateConnectObjectHandler)
-userRoutes.delete('/connectobject/:id', deleteConnectObjectHandler)
+userRoutes.get('/connectobject',jwtAuthMiddleware, getConnectObject)
+userRoutes.get('/connectobject/:id',jwtAuthMiddleware, getConnectObjectById)
+userRoutes.post('/createconnectobject',jwtAuthMiddleware,createConnectObjectHandler)
+userRoutes.put('/connectobject/:id',jwtAuthMiddleware,  updateConnectObjectHandler)
+userRoutes.delete('/connectobject/:id',jwtAuthMiddleware, deleteConnectObjectHandler)
 
 export default userRoutes
