@@ -1,10 +1,13 @@
 import { AssemblyAI } from 'assemblyai';
 import { Context } from 'hono';
+import dotenv from 'dotenv';
 
 export const getSpeechToText = async (audioFile: string) => {
   try {
+    dotenv.config();
+    const myEnv = process.env;
     const client = new AssemblyAI({
-      apiKey: '9001823fcda34038a7cbc150cdd37ad7',
+      apiKey: myEnv.ASSEMBLYAI_API_KEY ?? '',
       baseUrl: 'https://api.eu.assemblyai.com'
     });
 
