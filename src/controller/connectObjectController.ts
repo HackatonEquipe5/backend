@@ -28,13 +28,14 @@ export const getConnectObjectById = async (c: Context) => {
 
 export const createConnectObjectHandler = async (c: Context) => {
   try {
-    const { name, location, isFavorite, image } = await c.req.json();
+    const { name, location, isFavorite, image,  id_device } = await c.req.json();
 
     const newConnectObject = new ConnectObjectModel({
       name,
       location,
       isFavorite,
-      image
+      image,
+      id_device
     });
 
     await newConnectObject.save();
@@ -47,10 +48,10 @@ export const createConnectObjectHandler = async (c: Context) => {
 export const updateConnectObjectHandler = async (c: Context) => {
   try {
     const id = c.req.param('id');
-    const { name, location, isFavorite, image } = await c.req.json();
+    const { name, location, isFavorite, image,  id_device } = await c.req.json();
     const updateConnectObject = await ConnectObjectModel.findByIdAndUpdate(
       id,
-      { name, location, isFavorite, image },
+      { name, location, isFavorite, image,  id_device },
       { new: true }
     );
     if (updateConnectObject) {
