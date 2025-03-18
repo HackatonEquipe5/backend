@@ -15,7 +15,7 @@ const userRoutes = new Hono()
 userRoutes.use(
     '*',
     cors({
-      origin: 'http://localhost:4000', 
+      origin: 'http://localhost:3001', 
       allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
       allowHeaders: ['Content-Type', 'Authorization'] 
     })
