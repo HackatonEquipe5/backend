@@ -27,7 +27,7 @@ export const getIot = async (c: Context) => {
   try {
     const audioFile = './doc/fichie.m4a'; 
     const responseText = await getSpeechToText(audioFile);
-    if (responseText.includes("café")) {
+    if (responseText && responseText.includes("café")) {
       return c.json({ message: 'café' }, 200);
       // logique pour le café
     } else {
