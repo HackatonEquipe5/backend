@@ -1,5 +1,4 @@
 import { AssemblyAI } from 'assemblyai';
-import { promises as fs } from 'fs';
 import { Context } from 'hono';
 
 export const getSpeechToText = async (audioFile: string) => {

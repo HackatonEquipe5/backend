@@ -1,5 +1,5 @@
 import { Context, Next } from 'hono';
-import { jwt, sign as JwtSign,verify as Jwtverify } from "hono/jwt";
+import { verify as Jwtverify } from "hono/jwt";
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
