@@ -1,9 +1,6 @@
-import { Hono } from "hono";
 import { Context, Next } from "hono";
-import { serve } from "@hono/node-server";
 import { UserModel } from "../models/userModel";
-import { jwt, sign as JwtSign, verify as Jwtverify } from "hono/jwt";
-import { error } from "console";
+import { sign as JwtSign, verify as Jwtverify } from "hono/jwt";
 import dotenv from "dotenv";
 import bcrypt from 'bcrypt'
 dotenv.config();
