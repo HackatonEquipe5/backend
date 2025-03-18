@@ -36,11 +36,6 @@ export const login = async (c: Context) => {
         lastName: user.lastName,
         email:  user.email,
         password:  user.password,
-        description: user.description,
-        rating: user.rating,
-        tags: user.tags,
-        stuff: user.stuff,
-        isPhotograph: user.isPhotograph
       },
       token: token
     });
