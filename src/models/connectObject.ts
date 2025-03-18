@@ -5,6 +5,7 @@ export interface IConnectObject extends Document {
   location: string
   isFavorite: boolean 
   avatar: string
+  id_device : string
 }
 
 const ConnectObjectSchema: Schema = new Schema({
@@ -12,6 +13,7 @@ const ConnectObjectSchema: Schema = new Schema({
     location: { type: String, required: true },
     isFavorite: { type: Boolean, default: false },
     image: { type: String, default: "https://static.terresdecafe.com/8642-large_default/specialista-opera-ec9555bm-machine-a-cafe-expresso-automatique-black-metal.jpg"  },
-})
+  id_device: { type: String, required: true },
+  })
 
 export const ConnectObjectModel = mongoose.model<IConnectObject>('ConnectObject', ConnectObjectSchema)

@@ -35,13 +35,19 @@ export const postAudioFile = async (c: Context) => {
     const myEnv = process.env;
     const { file, id_device } = await c.req.parseBody()
     const filePath = await uploadFile(file);
+    console.log('fichier envoyé');
+    console.log('data:'+id_device);
     const responseText = await getSpeechToText(filePath);
+    console.log('traduction fait ');
     let message = '';
 
     if (responseText && responseText.includes("café")) { 
       const client = mqtt.connect('mqtt://' + myEnv.MQTT_IP + '/');
+      console.log('mqtt://' + myEnv.MQTT_IP + '/');
       client.on('connect', async () => {
         await client.publish('machinecafe/' + id_device + '/command','start');
+        console.log("client connecter")
+        console.log(client);
         await new Promise(f => setTimeout(f, 5000));
         await client.publish('machinecafe' + id_device + 'command', 'stop');
         client.end();
@@ -53,6 +59,7 @@ export const postAudioFile = async (c: Context) => {
     }
     
     deleteFile(filePath);
+    console.log("fichier supprimer")
     return c.json({ message }, 200);
   } catch (error) {
     return c.json({ message: 'Error processing audio file', error }, 500);
