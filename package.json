@@ -9,10 +9,13 @@
     "assemblyai": "^4.9.0",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
+    "fs": "^0.0.1-security",
     "hono": "^4.7.4",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.12.1",
-    "my-app": "file:"
+    "mqtt": "^5.10.4",
+    "my-app": "file:",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.0.3",

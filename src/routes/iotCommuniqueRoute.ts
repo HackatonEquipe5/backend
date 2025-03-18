@@ -1,7 +1,7 @@
 
 import { Hono } from 'hono'
 import {
-    getIot,
+  postAudioFile,
 } from '../controller/iotCommuniqueController'
 
 import { cors } from 'hono/cors'
@@ -18,7 +18,7 @@ iotCommuniqueRoutes.use(
     })
 )
 
-iotCommuniqueRoutes.get('/getIot',jwtAuthMiddleware, getIot)
+iotCommuniqueRoutes.post('/postAudioFile',jwtAuthMiddleware, postAudioFile)
 
 
 export default iotCommuniqueRoutes
