@@ -20,19 +20,14 @@ export const login = async (c: Context) => {
       return c.json({ message: "Invalid credentials" }, 401);
     }
 
-     const token = await JwtSign({ sub: user._id, email: user.email,exp: Math.floor(Date.now() / 1000) + (60 * 60)}, JWT_SECRET);
-
-    c.header('Authorization', `Bearer ${token}`);
-    console.log("Token:", token);
-
+    const token = await JwtSign({ sub: user._id, exp: Math.floor(Date.now() / 1000) + (60 * 60)}, JWT_SECRET);
     return c.json({ 
       success: true,
       user: {
         _id: user._id,
         firstName: user.firstName,
         lastName: user.lastName,
-        email:  user.email,
-        password:  user.password,
+        email:  user.email
       },
       token: token
     });
@@ -49,7 +44,7 @@ export const middleware = async (c: Context, n: Next) => {
       ?.replace("Bearer", "")
       .trim();
     if (!authToken) {
-      return c.json({ error: "token pas trouver" }, 401);
+      return c.json({ error: "Token not found" }, 401);
     }
     let payload = null;  
     try {
@@ -60,7 +55,7 @@ export const middleware = async (c: Context, n: Next) => {
     if (payload?.sub) {
       return await n();
     }
-    return c.json({ message: "authenfication failed" }, 401);
+    return c.json({ message: "Authenfication failed" }, 401);
   } catch (error) {
     console.error("Get user error:", error);
     return c.json({ message: "Error fetching users" }, 500);
