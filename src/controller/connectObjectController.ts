@@ -48,12 +48,19 @@ export const createConnectObjectHandler = async (c: Context) => {
 export const updateConnectObjectHandler = async (c: Context) => {
   try {
     const id = c.req.param('id');
-    const { name, location, isFavorite, image,  id_device } = await c.req.json();
+    const { name, location, isFavorite, image, id_device } = await c.req.json();
+
+    const updateData: Record<string, any> = { name, location, isFavorite, id_device };
+    if (image) {
+      updateData.image = image;
+    }
+
     const updateConnectObject = await ConnectObjectModel.findByIdAndUpdate(
-      id,
-      { name, location, isFavorite, image,  id_device },
-      { new: true }
+        id,
+        updateData,
+        { new: true }
     );
+
     if (updateConnectObject) {
       return c.json(updateConnectObject);
     } else {
