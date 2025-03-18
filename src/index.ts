@@ -11,8 +11,8 @@ connectDB();
 app.use(
   '*',
   cors({
-    origin: 'http://localhost:4000',  
-    allowMethods: ['GET', 'POST', 'PUT', 'DELETE'], 
+    origin: 'http://localhost:3001',
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowHeaders: ['Content-Type', 'Authorization']
   })
 )

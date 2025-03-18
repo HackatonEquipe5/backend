@@ -58,22 +58,26 @@ export const createUserHandler = async (c: Context) => {
 
 export const updateUserHandler = async (c: Context) => {
   try {
-    const id = c.req.param('id')
-    const { firstName, lastName, email, password  } = await c.req.json()
-    const updatedUser = await UserModel.findByIdAndUpdate(
-      id,
-      { firstName, lastName, email, password },
-      { new: true }
-    )
+    const id = c.req.param('id');
+    const { firstName, lastName, email, password } = await c.req.json();
+
+    const updateData: any = { firstName, lastName, email };
+
+    if (password) {
+      updateData.password = password;
+    }
+
+    const updatedUser = await UserModel.findByIdAndUpdate(id, updateData, { new: true });
+
     if (updatedUser) {
-      return c.json(updatedUser)
+      return c.json(updatedUser);
     } else {
-      return c.json({ message: 'User not found' }, 404)
+      return c.json({ message: 'User not found' }, 404);
     }
   } catch (error) {
-    return c.json({ message: 'Error updating user', error }, 500)
+    return c.json({ message: 'Error updating user', error }, 500);
   }
-}
+};
 
 export const deleteUserHandler = async (c: Context) => {
   try {
